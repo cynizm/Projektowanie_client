@@ -5,7 +5,10 @@ import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -41,6 +44,82 @@ public class Lista_projektow_form extends JPanel implements ActionListener {
         table.getSelectionModel().addListSelectionListener(new RowListener());
         table_content();
         add(new JScrollPane(table));
+        
+        JButton button1 = new JButton("Przypisz osobę do projektu");
+        button1.addActionListener(new ActionListener() { 
+            public void actionPerformed(ActionEvent e)
+            {   
+                int rzad = table.getSelectedRow();     
+                if(rzad==-1){
+                    JOptionPane.showMessageDialog(null, "Nie wybrano projektu!");
+                }else{
+                    DodajOsobeDoProjektu_form d1 = new DodajOsobeDoProjektu_form(
+                        (String)table.getModel().getValueAt(rzad, 1),
+                        (String)table.getModel().getValueAt(rzad, 0)
+                    );
+                    d1.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                    d1.setVisible(true);
+                }
+            }
+        }); 
+        JButton button2 = new JButton("Dodaj zadanie do projektu");
+        button2.addActionListener(new ActionListener() { 
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {   
+                int rzad = table.getSelectedRow();     
+                if (rzad==-1)
+                    JOptionPane.showMessageDialog(null, "Nie wybrano projektu!");
+                else {
+                    DodajZadanieDoProjektu_form d1 = new DodajZadanieDoProjektu_form((String)table.getModel().getValueAt(rzad, 1));
+                    d1.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                    d1.setVisible(true);
+                }
+            }
+        });
+        JButton button3 = new JButton("Pokaż listę osób przypisanych do projektu");
+        
+        button3.addActionListener(new ActionListener() { 
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {   
+                int rzad = table.getSelectedRow();     
+                if(rzad==-1){
+                    JOptionPane.showMessageDialog(null, "Nie wybrano projektu");
+                }else{
+                PokazZespol_form zespol = new PokazZespol_form(
+                        (String)table.getModel().getValueAt(rzad, 1),
+                        (String)table.getModel().getValueAt(rzad, 0)
+                );
+                zespol.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                zespol.setVisible(true);
+                }
+            }
+        });
+        
+        JButton button4 = new JButton("Pokaż listę zadań dodanych do projektu");
+        
+        button4.addActionListener(new ActionListener() { 
+            public void actionPerformed(ActionEvent e)
+            {   
+                int rzad = table.getSelectedRow();     
+                if (rzad==-1)
+                    JOptionPane.showMessageDialog(null, "Nie wybrano projektu!");
+                else {
+                    PokazZadania_form zadania = new PokazZadania_form(
+                            (String)table.getModel().getValueAt(rzad, 1),
+                            (String)table.getModel().getValueAt(rzad, 0)
+                    );
+                    zadania.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                    zadania.setVisible(true);
+                }
+            }
+        });
+        
+        add(button1);
+        add(button2);
+        add(button3);
+        add(button4);
 
     }
     
