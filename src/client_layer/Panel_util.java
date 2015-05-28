@@ -27,7 +27,9 @@ public class Panel_util implements ActionListener {
     final static String PROJEKT = "Dodaj projekt";
     final static String LISTA_PROJEKTOW = "Lista projektów";
     final static String DODAJ_DO_PROJEKTU = "Dodaj Klienta do Projektu";
-    
+    final static String SPRINT = "Dodaj sprint";
+    final static String LISTA_SPRINTOW = "Lista sprintow";
+    final static String STAN_SPRINTU = "Dodaj stan sprintu";
     
         public JMenuBar createMenuBar() {
         JMenuBar menuBar;
@@ -69,8 +71,20 @@ public class Panel_util implements ActionListener {
         
         menuItem = new JMenuItem(DODAJ_DO_PROJEKTU);
         menuItem.addActionListener(this);
+        menu.add(menuItem);      
+               
+        menuItem = new JMenuItem(SPRINT);
+        menuItem.addActionListener(this);
+        menu.add(menuItem);
+        
+        menuItem = new JMenuItem(LISTA_SPRINTOW);
+        menuItem.addActionListener(this);
         menu.add(menuItem);
        
+        menuItem = new JMenuItem(STAN_SPRINTU);
+        menuItem.addActionListener(this);
+        menu.add(menuItem);
+        
        
         return menuBar;
     }
@@ -85,6 +99,9 @@ public class Panel_util implements ActionListener {
         Dodaj_projekt_form card5 = new Dodaj_projekt_form();
         Lista_projektow_form card6 = new Lista_projektow_form();
         Dodaj_klienta_do_projektu_form card7 = new Dodaj_klienta_do_projektu_form();
+        DodajSprint_form card8 = new DodajSprint_form();
+        Lista_sprintow_form card9 = new Lista_sprintow_form();
+        DodajStanSprintu_form card10 = new DodajStanSprintu_form();
         
         cards = new JPanel(new CardLayout());
         cards.add(card0, KLIENT);
@@ -95,6 +112,9 @@ public class Panel_util implements ActionListener {
         cards.add(card5, PROJEKT);
         cards.add(card6, LISTA_PROJEKTOW);
         cards.add(card7, DODAJ_DO_PROJEKTU);
+        cards.add(card8, SPRINT);
+        cards.add(card9, LISTA_SPRINTOW);
+        cards.add(card10, STAN_SPRINTU);
         
         JPanel panel = new JPanel();
 
@@ -137,6 +157,18 @@ public class Panel_util implements ActionListener {
             case DODAJ_DO_PROJEKTU:
                 ((Dodaj_klienta_do_projektu_form) cards.getComponent(7)).init();
                 cl.show(cards, DODAJ_DO_PROJEKTU);
+                break;
+            case SPRINT:
+                ((DodajSprint_form) cards.getComponent(8)).init();
+                cl.show(cards, SPRINT);
+                break;
+            case LISTA_SPRINTOW:
+                ((Lista_sprintow_form) cards.getComponent(9)).init();
+                cl.show(cards, LISTA_SPRINTOW);
+                break;
+            case STAN_SPRINTU:
+                ((DodajStanSprintu_form) cards.getComponent(10)).init();                
+                cl.show(cards, STAN_SPRINTU); 
                 break;
         }
     }
