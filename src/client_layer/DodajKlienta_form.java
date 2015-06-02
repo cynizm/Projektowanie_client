@@ -43,11 +43,12 @@ public class DodajKlienta_form extends javax.swing.JPanel  {
             return null;
         }  
         
-        String data[] = {"0", (String) nazwaTF.getText(),
-            (String) nipTF.getText(), (String) ulicaTF.getText(),
-            (String) nr_domuTF.getText(), (String) nr_lokaluTF.getText(),
-            (String) miejscowoscTF.getText(), (String) kod_pocz1TF.getText() + (String) kod_pocz2TF.getText()};
-        return data;   
+        String data[] = {(String) nazwaTF.getText(),
+	    (String) nipTF.getText(), (String) ulicaTF.getText(),
+	    (String) nr_domuTF.getText(), (String) nr_lokaluTF.getText(),
+	    (String) miejscowoscTF.getText(), (String)
+            kod_pocz1TF.getText() + (String) kod_pocz2TF.getText()};
+	return data;
     }
     
     public String content_validate(JTextField val, int opcja, String nazwa_pola)
