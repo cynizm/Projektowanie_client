@@ -55,7 +55,7 @@ public class DodajStanSprintu_form extends JPanel implements ActionListener {
         
             add(lkierownik);                      
             
-            Utility.initComboBox(cbKierownik,Client.getFasada().pobierzTabliceKierownikow());
+            add(cbKierownik);
 
             add(lsprinty);      
             

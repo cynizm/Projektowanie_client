@@ -19,28 +19,28 @@ public class DodajKlienta_form extends javax.swing.JPanel  {
    
     public String[] form_title() {
         if (content_validate(kod_pocz1TF, 1, "Kod pocztowy (czesc 1)") == null) {
-            return null;
+            return new String[0];
         }
         if (content_validate(kod_pocz2TF, 2, "Kod pocztowy (czesc 2)") == null) {
-            return null;
+            return new String[0];
         }
         if (content_validate(miejscowoscTF, 4, "Miejscowosc") == null) {
-            return null;
+            return new String[0];
         }
         if (content_validate(nazwaTF, 5, "Nazwa firmy") == null) {
-            return null;
+            return new String[0];
         }
         if (content_validate(nipTF, 3, "NIP") == null) {
-            return null;
+            return new String[0];
         }
         if (content_validate(nr_domuTF, 6, "Nr domu") == null) {
-            return null;
+            return new String[0];
         }
         if (content_validate(nr_lokaluTF, 6, "Nr lokalu") == null) {
-            return null;
+            return new String[0];
         }
         if (content_validate(ulicaTF, 4, "Ulica") == null) {
-            return null;
+            return new String[0];
         }  
         
         String data[] = {(String) nazwaTF.getText(),
@@ -75,9 +75,12 @@ public class DodajKlienta_form extends javax.swing.JPanel  {
                 break;
             case 6:                     // nr domu i lokalu
                 wzorzec = "[\\w]+";
+                break;
+            default:
+                break;
         }
 
-        if (s.equals("")) {
+        if ("".equals(s)) {
             JOptionPane.showMessageDialog(this, "Nie wszystkie pola zostaly wypelnione");
             return null;
         } 
@@ -133,21 +136,16 @@ public class DodajKlienta_form extends javax.swing.JPanel  {
         jLabel8.setText("-");
 
         dodajButton.setText("Dodaj klienta");
+        
         dodajButton.addActionListener(new java.awt.event.ActionListener() {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                dodajButtonActionPerformed(evt);
+                dodajButtonActionPerformed();
             }
         });
 
         jLabel9.setText("Klienci");
         
-        
-//        String[] tablica = Client.getFasada().modelKlienci(); 
-//            
-//            if(tablica != null)
-//            {
-//                listaComboBox.setModel(new DefaultComboBoxModel(tablica));
-//            }
         Utility.initComboBox(listaComboBox, Client.getFasada().modelKlienci());
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -230,7 +228,7 @@ public class DodajKlienta_form extends javax.swing.JPanel  {
         );
     }// </editor-fold>                        
 
-    private void dodajButtonActionPerformed(java.awt.event.ActionEvent evt) {                                            
+    private void dodajButtonActionPerformed() {                                            
         String[] data = form_title();
         if (data == null) {
             return;
