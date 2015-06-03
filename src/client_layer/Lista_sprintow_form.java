@@ -58,10 +58,8 @@ public class Lista_sprintow_form extends JPanel implements ActionListener {
     }
     
     public void init() {
-        bProjekt.removeAllItems();
-            for (Object nazwa : Client.getFasada().pobierzTabliceKierownikow()) {
-                bProjekt.addItem((String) nazwa);
-            }
+            Utility.initComboBox(bProjekt,Client.getFasada().pobierzTabliceKierownikow());
+
             table_content();
             tabelaStanow_content();    
     }

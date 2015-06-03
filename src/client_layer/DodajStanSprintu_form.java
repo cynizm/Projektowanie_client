@@ -2,11 +2,8 @@ package client_layer;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -21,7 +18,7 @@ import javax.swing.JComboBox;
 public class DodajStanSprintu_form extends JPanel implements ActionListener {
 
         JLabel lkierownik = new JLabel("Kierownik");
-        JComboBox kierownik= new JComboBox();
+        JComboBox cbKierownik= new JComboBox();
     
         JLabel lsprinty = new JLabel("Sprinty");
         JComboBox sprinty= new JComboBox();
@@ -57,10 +54,9 @@ public class DodajStanSprintu_form extends JPanel implements ActionListener {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         
             add(lkierownik);                      
-            kierownik = new JComboBox(Client.getFasada().pobierzTabliceKierownikow());
-            add(kierownik);          
-            kierownik.setName("Kierownik");
             
+            Utility.initComboBox(cbKierownik,Client.getFasada().pobierzTabliceKierownikow());
+
             add(lsprinty);      
             
             generujListeSprintow();
@@ -97,7 +93,7 @@ public class DodajStanSprintu_form extends JPanel implements ActionListener {
             ilosc_zadan_zakonczonych.setName("ZadanZakonczonych");
 
             dodaj_sprint.addActionListener(this);
-            kierownik.addActionListener(this);
+            cbKierownik.addActionListener(this);
             add(dodaj_sprint);
 
             //add(lstany);
@@ -106,11 +102,7 @@ public class DodajStanSprintu_form extends JPanel implements ActionListener {
     }
     
     public void init() {
-            kierownik.removeAllItems();
-            for (Object kier : Client.getFasada().pobierzTabliceKierownikow()) {
-                kierownik.addItem((String) kier);
-            }
-       
+            Utility.initComboBox(cbKierownik,Client.getFasada().pobierzTabliceKierownikow());
             generujListeSprintow();
         }
     
@@ -124,7 +116,7 @@ public class DodajStanSprintu_form extends JPanel implements ActionListener {
                     return;
             }
 
-            if (kierownik.getItemCount() != 0)
+            if (cbKierownik.getItemCount() != 0)
             {
                 if (sprinty.getItemCount() != 0)
                 {
@@ -138,7 +130,7 @@ public class DodajStanSprintu_form extends JPanel implements ActionListener {
                         dataSprintu[i++] = pom[1];
                     }
 
-                    int rezultat = Client.getFasada().addStanSprintu(data, dataSprintu, kierownik.getSelectedItem().toString());
+                    int rezultat = Client.getFasada().addStanSprintu(data, dataSprintu, cbKierownik.getSelectedItem().toString());
 
                     if (rezultat == 0)
                         JOptionPane.showMessageDialog(this, "Dodano stan sprintu!");
@@ -155,7 +147,7 @@ public class DodajStanSprintu_form extends JPanel implements ActionListener {
                 JOptionPane.showMessageDialog(this, "Nie wskazano kierownika projektu!");
             }   
         }
-        else if (wywolywacz == kierownik)
+        else if (wywolywacz == cbKierownik)
         {
            generujListeSprintow();
         }
@@ -241,9 +233,9 @@ public class DodajStanSprintu_form extends JPanel implements ActionListener {
         public void generujListeSprintow()
         {
             sprinty.removeAllItems();
-            if (kierownik.getItemCount() != 0)
+            if (cbKierownik.getItemCount() != 0)
             {
-                for(Object[] sprint : Client.getFasada().modelSprinty(kierownik.getSelectedItem().toString()))
+                for(Object[] sprint : Client.getFasada().modelSprinty(cbKierownik.getSelectedItem().toString()))
                     sprinty.addItem("Nr sprintu:" + sprint[0] + ", Status sprintu:"+ sprint[3]);
             }
         }

@@ -64,11 +64,9 @@ public class DodajSprint_form extends JPanel implements ActionListener {
     }
     
     public void init() {
-            projekty.removeAllItems();
-            for (Object email : Client.getFasada().pobierzTabliceKierownikow()) {
-                projekty.addItem((String) email);
-            }
-        }
+            Utility.initComboBox(projekty, Client.getFasada().pobierzTabliceKierownikow());
+    }
+    
     public void actionPerformed(ActionEvent evt) {                
 		String[] sp1 = form_content();
                 

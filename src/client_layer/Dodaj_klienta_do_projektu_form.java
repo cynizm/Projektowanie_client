@@ -1,5 +1,6 @@
 package client_layer;
 
+import static client_layer.Utility.initComboBox;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -38,12 +39,8 @@ public class Dodaj_klienta_do_projektu_form extends JPanel implements ActionList
     }
     
     public void init() {
-        cbProjekty.removeAllItems();
-        for(Object r : Client.getFasada().pobierzTabliceProjektow())
-            cbProjekty.addItem(r.toString());
-        cbKlienci.removeAllItems();
-        for(Object r : Client.getFasada().pobierzTabliceKlientow())
-            cbKlienci.addItem(r.toString());
+        Utility.initComboBox(cbProjekty,Client.getFasada().pobierzTabliceProjektow());
+        Utility.initComboBox(cbKlienci,Client.getFasada().pobierzTabliceKlientow());
     }
 
     @Override
