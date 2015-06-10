@@ -53,23 +53,26 @@ public class Dodaj_projekt_form extends JPanel implements ActionListener {
     public void init() {
         Utility.initComboBox(cbKierownikProjektu, Client.getFasada().pobierzDostepnychKierownikow());
     }
-     
+
+    
     @Override
     public void actionPerformed(ActionEvent evt) {
-        String[] data = form_content();
-        if (data == null) {
-            return;
-        }
-        if(cbKierownikProjektu.getSelectedItem() == null)
-            JOptionPane.showMessageDialog(this, "Nie wybrano kierownika!");
-        int result = Client.getFasada().addProjekt(cbKierownikProjektu.getSelectedItem().toString(),data); // ???
-        if (result == 0) 
-            JOptionPane.showMessageDialog(this, "Dodano projekt!");
-        else if (result == 1) 
-            JOptionPane.showMessageDialog(this, "Podana osoba nie jest kierownikiem!");
-        else if (result == 2) 
-            JOptionPane.showMessageDialog(this, "Projekt juz istnieje!");
-        Utility.initComboBox(cbKierownikProjektu, Client.getFasada().pobierzDostepnychKierownikow());
+	String[] data = form_content();
+	if (data == null) {
+	    return;
+	}
+	if(cbKierownikProjektu.getSelectedItem() == null)
+	{   JOptionPane.showMessageDialog(this, "Nie wybrano kierownika!");
+	    return;}
+	int result = Client.getFasada().addProjekt(cbKierownikProjektu.getSelectedItem().toString(),data);
+	if (result == 0) 
+	    JOptionPane.showMessageDialog(this, "Dodano projekt!");
+	else if (result == 1) 
+	    JOptionPane.showMessageDialog(this, "Podana osoba nie jest kierownikiem!");
+	else if (result == 2) 
+	    JOptionPane.showMessageDialog(this, "Projekt juz istnieje!");
+	Utility.initComboBox(cbKierownikProjektu,
+        Client.getFasada().pobierzDostepnychKierownikow());
     }
 
     public String[] form_content() {
