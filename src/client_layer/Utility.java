@@ -1,4 +1,4 @@
-package client.layer;
+package client_layer;
 
 import javax.swing.JComboBox;
 

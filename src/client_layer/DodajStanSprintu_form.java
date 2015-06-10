@@ -1,4 +1,4 @@
-package client.layer;
+package client_layer;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -146,19 +146,9 @@ public final class DodajStanSprintu_form extends JPanel implements ActionListene
 	
 
 	public String[] form_content() {
-		if (!content_validate(data_akt))
-			return new String[0];
-		if (!content_validate(numer_dnia_sprintu))
-			return new String[0];
-		if (!content_validate(ilosc_zadan_nierozpoczetych))
-			return new String[0];
-		if (!content_validate(ilosc_zadan_w_analizie))
-			return new String[0];
-                if (!content_validate(ilosc_zadan_w_implementacji))
-			return new String[0];
-                if (!content_validate(ilosc_zadan_w_testach))
-			return new String[0];
-                if (!content_validate(ilosc_zadan_zakonczonych))
+		if (!content_validate(data_akt)||!content_validate(numer_dnia_sprintu)||!content_validate(ilosc_zadan_nierozpoczetych)||
+                        !content_validate(ilosc_zadan_w_analizie)||!content_validate(ilosc_zadan_w_implementacji)||!content_validate(ilosc_zadan_w_testach)||
+                        !content_validate(ilosc_zadan_zakonczonych))
 			return new String[0];
                 String data[] = {(String) numer_dnia_sprintu.getText(),(String) ilosc_zadan_nierozpoczetych.getText(),
                     (String) ilosc_zadan_w_analizie.getText(), (String) ilosc_zadan_w_implementacji.getText(),

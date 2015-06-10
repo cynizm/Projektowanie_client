@@ -1,4 +1,4 @@
-package client.layer;
+package client_layer;
 
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -29,8 +29,8 @@ public class ListaOsob_form extends JPanel implements ActionListener {
 
 	public ListaOsob_form(Client client) {
 		super();
-		//this.client = client;
-		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+
+                setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		JLabel lnumber = new JLabel("Lista dodanych osób");
 
 		add(lnumber);
@@ -64,7 +64,7 @@ public class ListaOsob_form extends JPanel implements ActionListener {
 
 	public String content_validate(JTextField val) {
 		String s = val.getText();
-		if (s.equals("") || s.length() > 30) {
+		if ("".equals(s) || s.length() > 30) {
 			JOptionPane.showMessageDialog(this, "Nie wprowadzono danych.\nNie można wykonać operacji.");
 			return null;
 		} else {
@@ -75,7 +75,7 @@ public class ListaOsob_form extends JPanel implements ActionListener {
 
 	public String[] validateForm() {
 		if (content_validate(email) == null) {
-			return null;
+			return new String[0];
 		}
 		String data[] = {
 			"0",

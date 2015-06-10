@@ -1,4 +1,4 @@
-package client.layer;
+package client_layer;
 
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
@@ -74,14 +74,14 @@ public class Dodaj_projekt_form extends JPanel implements ActionListener {
 
     public String[] form_content() {
         if (content_validate(tfNazwaProjektu) == null) {
-            return null;
+            return new String[0];
         }
         
         try {
             Integer.parseInt(tfStatusProjektu.getText());
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Identyfikator projektu nie jest liczbą.\nNie można wykonać operacji.");
-            return null;
+            return new String[0];
         }
         
         String data[] = { (String) tfNazwaProjektu.getText(), (String) tfStatusProjektu.getText()
@@ -98,7 +98,7 @@ public class Dodaj_projekt_form extends JPanel implements ActionListener {
     public String content_validate(JTextField tf) {
         String str = tf.getText();
 
-        if (str.equals("")) {
+        if ("".equals(str)) {
                 JOptionPane.showMessageDialog(this, "Nie wpisano wymaganej zawartości!");
                 return null;
         }

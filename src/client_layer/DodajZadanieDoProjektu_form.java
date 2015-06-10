@@ -1,5 +1,5 @@
 
-package client.layer;
+package client_layer;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
