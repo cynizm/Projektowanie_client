@@ -1,4 +1,4 @@
-package client_layer;
+package client.layer;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,11 +11,7 @@ import javax.swing.JTextField;
 
 import javax.swing.JComboBox;
 
-/**
- *
- * @author SND
- */
-public class DodajStanSprintu_form extends JPanel implements ActionListener {
+public final class DodajStanSprintu_form extends JPanel implements ActionListener {
 
         JLabel lkierownik = new JLabel("Kierownik");
         JComboBox cbKierownik= new JComboBox();
@@ -44,10 +40,7 @@ public class DodajStanSprintu_form extends JPanel implements ActionListener {
         JLabel lilosc_zadan_zakonczonych = new JLabel("Ilosc zadan zakonczonych:");
 	JTextField ilosc_zadan_zakonczonych = new JTextField(30);
 	
-	JButton dodaj_sprint = new JButton("Dodaj stan sprintu");  
-        
-        //JLabel lstany = new JLabel("Stany:");
-        //JComboBox stany= new JComboBox();     
+	JButton dodaj_sprint = new JButton("Dodaj stan sprintu");    
 	
         
     DodajStanSprintu_form() {
@@ -96,9 +89,6 @@ public class DodajStanSprintu_form extends JPanel implements ActionListener {
             cbKierownik.addActionListener(this);
             add(dodaj_sprint);
 
-            //add(lstany);
-            //add(stany);
-            //stany.setName("Stany");
     }
     
     public void init() {
@@ -106,6 +96,7 @@ public class DodajStanSprintu_form extends JPanel implements ActionListener {
             generujListeSprintow();
         }
     
+    @Override
     public void actionPerformed(ActionEvent evt) {        
         Object wywolywacz = evt.getSource();
         
@@ -155,27 +146,20 @@ public class DodajStanSprintu_form extends JPanel implements ActionListener {
 	
 
 	public String[] form_content() {
-		if (!content_validate(data_akt)) {
-			return null;
-		}
-		if (!content_validate(numer_dnia_sprintu)) {
-			return null;
-		}
-		if (!content_validate(ilosc_zadan_nierozpoczetych)) {
-			return null;
-		}
-		if (!content_validate((ilosc_zadan_w_analizie))){
-			return null;
-		}
-                if (!content_validate((ilosc_zadan_w_implementacji))){
-			return null;
-		}
-                if (!content_validate((ilosc_zadan_w_testach))){
-			return null;
-		}
-                if (!content_validate((ilosc_zadan_zakonczonych))){
-			return null;
-		}
+		if (!content_validate(data_akt))
+			return new String[0];
+		if (!content_validate(numer_dnia_sprintu))
+			return new String[0];
+		if (!content_validate(ilosc_zadan_nierozpoczetych))
+			return new String[0];
+		if (!content_validate(ilosc_zadan_w_analizie))
+			return new String[0];
+                if (!content_validate(ilosc_zadan_w_implementacji))
+			return new String[0];
+                if (!content_validate(ilosc_zadan_w_testach))
+			return new String[0];
+                if (!content_validate(ilosc_zadan_zakonczonych))
+			return new String[0];
                 String data[] = {(String) numer_dnia_sprintu.getText(),(String) ilosc_zadan_nierozpoczetych.getText(),
                     (String) ilosc_zadan_w_analizie.getText(), (String) ilosc_zadan_w_implementacji.getText(),
                     (String) ilosc_zadan_w_testach.getText(), (String) ilosc_zadan_zakonczonych.getText(), (String) data_akt.getText()};
@@ -183,10 +167,9 @@ public class DodajStanSprintu_form extends JPanel implements ActionListener {
                 return data;
 	}
 
-	//metoda do refaktoryzacji
 	public boolean content_validate(JTextField tf) {
 		String str = tf.getText();
-		if (str.equals("")) {
+		if ("".equals(str)) {
 			JOptionPane.showMessageDialog(this, "Nie wpisano wymaganej zawartości!");
 			return false;
 		} else if ("DataAktualizacji".equals(tf.getName())) {
@@ -219,11 +202,9 @@ public class DodajStanSprintu_form extends JPanel implements ActionListener {
                             JOptionPane.showMessageDialog(this, "ZadanWTestach: nieprawidlowy format danych!");
                             return false;
                         }
-		} else if ("ZadanZakonczonych".equals(tf.getName())) {
-                        if(!str.matches("^[0-9]+$")) {
+		} else if ("ZadanZakonczonych".equals(tf.getName())&&!str.matches("^[0-9]+$")) {
                             JOptionPane.showMessageDialog(this, "ZadanZakonczonych: nieprawidlowy format danych!");
                             return false;
-                        }
 		}
                 
                 return true;    

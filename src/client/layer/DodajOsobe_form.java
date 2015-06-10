@@ -1,5 +1,5 @@
 
-package client_layer;
+package client.layer;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -45,7 +45,7 @@ public class DodajOsobe_form extends JPanel implements ActionListener {
     
     public String content_validate(JTextField val) {
         String s = val.getText();
-        if (s.equals("")|| s.length()>30) {
+        if ("".equals(s)|| s.length()>30) {
             JOptionPane.showMessageDialog(this, "Nie wprowadzono wszystkich danych.\nNie można wykonać operacji.");
             return null;
         } else {
@@ -56,18 +56,18 @@ public class DodajOsobe_form extends JPanel implements ActionListener {
     
     public String[] validateForm() {
         if (content_validate(imie) == null) {
-            return null;
+            return new String[0];
         }
         if (content_validate(nazwisko) == null) {
-            return null;
+            return new String[0];
         }
         if (content_validate(email) == null) {
-            return null;
+            return new String[0];
         } else {
             if(!email.getText().matches("[0-9a-zA-Z_-]{1,}@[0-9a-zA-Z_-]{1,}.[0-9a-zA-Z_-]{1,}"))
             {
                 JOptionPane.showMessageDialog(this, "Niepoprawny adres e-mail.");
-                return null;
+                return new String[0];
             }
         }
 

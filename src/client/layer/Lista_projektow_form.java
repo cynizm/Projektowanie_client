@@ -1,4 +1,4 @@
-package client_layer;
+package client.layer;
 
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -21,7 +21,6 @@ public class Lista_projektow_form extends JPanel implements ActionListener {
     JTable table;
     int row;
     MyTableModel model;
-    //JComboBox bProjekt;
     
     public Lista_projektow_form() {
         super();
@@ -30,8 +29,6 @@ public class Lista_projektow_form extends JPanel implements ActionListener {
         
         JLabel lProjekt = new JLabel("Projekt");
         add(lProjekt);
-//        bProjekt = new JComboBox();
-//        add(bProjekt);
         
         model = new MyTableModel();
         table = new JTable(model);
@@ -47,6 +44,7 @@ public class Lista_projektow_form extends JPanel implements ActionListener {
         
         JButton button1 = new JButton("Przypisz osobę do projektu");
         button1.addActionListener(new ActionListener() { 
+            @Override
             public void actionPerformed(ActionEvent e)
             {   
                 int rzad = table.getSelectedRow();     
@@ -100,6 +98,7 @@ public class Lista_projektow_form extends JPanel implements ActionListener {
         JButton button4 = new JButton("Pokaż listę zadań dodanych do projektu");
         
         button4.addActionListener(new ActionListener() { 
+            @Override
             public void actionPerformed(ActionEvent e)
             {   
                 int rzad = table.getSelectedRow();     
@@ -140,6 +139,7 @@ public class Lista_projektow_form extends JPanel implements ActionListener {
     
     @Override
     public void actionPerformed(ActionEvent event) {
+        // pusta metoda
     }
     
     private class RowListener implements ListSelectionListener {

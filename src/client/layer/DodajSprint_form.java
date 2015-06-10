@@ -1,4 +1,4 @@
-package client_layer;
+package client.layer;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -67,6 +67,7 @@ public class DodajSprint_form extends JPanel implements ActionListener {
             Utility.initComboBox(projekty, Client.getFasada().pobierzTabliceKierownikow());
     }
     
+    @Override
     public void actionPerformed(ActionEvent evt) {                
 		String[] sp1 = form_content();
                 
@@ -104,13 +105,13 @@ public class DodajSprint_form extends JPanel implements ActionListener {
 
 	public String[] form_content() {
 		if (!content_validate(nr_sprintu)) {
-			return null;
+			return new String[0];
 		}
                 if (!content_validate(data_rozp)) {
-			return null;
+			return new String[0];
 		}
                 if (!content_validate(data_zak)) {
-			return null;
+			return new String[0];
 		}
                
 		String data[] = {(String) nr_sprintu.getText(), (String)status.getSelectedItem() };
@@ -120,7 +121,7 @@ public class DodajSprint_form extends JPanel implements ActionListener {
 	//metoda do refaktoryzacji
 	public boolean content_validate(JTextField tf) {
 		String str = tf.getText();
-		if (str.equals("")) {
+		if ("".equals(str)) {
 			JOptionPane.showMessageDialog(this, "Wypełnij wszystkie pola");
 			return false;
 		}

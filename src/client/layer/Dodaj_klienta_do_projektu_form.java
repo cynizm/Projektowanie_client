@@ -1,6 +1,6 @@
-package client_layer;
+package client.layer;
 
-import static client_layer.Utility.initComboBox;
+import static client.layer.Utility.initComboBox;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

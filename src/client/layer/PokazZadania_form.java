@@ -1,5 +1,5 @@
 
-package client_layer;
+package client.layer;
 
 import java.awt.Dimension;
 import javax.swing.BoxLayout;

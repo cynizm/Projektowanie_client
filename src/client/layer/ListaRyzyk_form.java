@@ -1,101 +1,72 @@
-package client_layer;
+
+package client.layer;
 
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.BoxLayout;
-import javax.swing.JButton;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.JTextField;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.AbstractTableModel;
 
-public class ListaOsob_form extends JPanel implements ActionListener {
+public class ListaRyzyk_form extends JPanel implements ActionListener {
 
-	Client client;
 	JTable table;
-	MyTableModel model;
 	int row;
-	JLabel lemail = new JLabel("E-mail");
-	JTextField email = new JTextField(10);
-	JButton szukaj_osobe = new JButton("Szukaj");
-	ListaOsob_form thisClass = this;
-
-	public ListaOsob_form(Client client) {
+	MyTableModel model;
+	JComboBox bProjekt;
+        int licz;
+	public ListaRyzyk_form() {
 		super();
-		//this.client = client;
-		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-		JLabel lnumber = new JLabel("Lista dodanych osób");
 
-		add(lnumber);
+                this.licz = 1;
+                
+		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+
+		JLabel lProjekt = new JLabel("Kierownik");
+		add(lProjekt);
+		bProjekt = new JComboBox(Client.getFasada().pobierzTabliceProjektow());
+		add(bProjekt);
+
 		model = new MyTableModel();
 		table = new JTable(model);
-		table.setPreferredScrollableViewportSize(new Dimension(500, 100));
+
+		table.getColumn("Data wystapienia").setMinWidth(185);
+		table.getColumn("Data zakonczenia").setMinWidth(175);
+		table.getColumn("Prwd wystapienia").setMinWidth(20);
+		table.setPreferredScrollableViewportSize(new Dimension(700, 100));
 		table.setFillsViewportHeight(true);
 		table.getSelectionModel().addListSelectionListener(new RowListener());
-		table_content();
+
 		add(new JScrollPane(table));
-		add(lemail);
-		add(email);
-		szukaj_osobe.addActionListener(thisClass);
-		add(szukaj_osobe);
 	}
 
-	public void init() {
-		table_content();
-	}
+        public void init() {
+            
+            Utility.initComboBox(bProjekt, Client.getFasada().pobierzTabliceKierownikow());
+            table_content();
+        }
 
 	@Override
 	public void paintComponent(Graphics g) {
-		super.paintComponent(g);
-		table_content();
-	}
-
-	private void table_content() {
-		Object[][] osoby = Client.getFasada().modelTablicaZDanymiOsob();
-		model.setData(osoby);
-	}
-
-	public String content_validate(JTextField val) {
-		String s = val.getText();
-		if (s.equals("") || s.length() > 30) {
-			JOptionPane.showMessageDialog(this, "Nie wprowadzono danych.\nNie można wykonać operacji.");
-			return null;
-		} else {
-			val.setText(s);
-			return s;
-		}
-	}
-
-	public String[] validateForm() {
-		if (content_validate(email) == null) {
-			return null;
-		}
-		String data[] = {
-			"0",
-			(String) email.getText()
-		};
-		return data;
+            super.paintComponent(g);
+            
+            if (licz % 2 == 0) {
+                table_content();  
+            }
+            licz++;
+            table.repaint();
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent event) {
-		String[] data = validateForm();
-		if (data == null) {
-			return;
-		}
-                String dane = Client.getFasada().szukajOsobe(data);
-		if (dane != null) {
-			JOptionPane.showMessageDialog(this, "Osoba o podanym adresie e-mail istnieje w systemie.\n" + Client.getFasada().szukajOsobe(data));
-		} else {
-			JOptionPane.showMessageDialog(this, "Brak szukanej osoby.");
-		}
 	}
 
 	private class RowListener implements ListSelectionListener {
@@ -107,16 +78,25 @@ public class ListaOsob_form extends JPanel implements ActionListener {
 			}
 			row = table.getSelectionModel().getLeadSelectionIndex();
 		}
+	}
 
+	void table_content() {
+		Object[][] titles = Client.getFasada().modelRisks((String)bProjekt.getSelectedItem());
+                
+		model.setData(titles);
+                
 	}
 
 	class MyTableModel extends AbstractTableModel {
 
-		private final String[] columnNames = {
-			"Imię",
-			"Nazwisko",
-			"E-mail",
-			"Rola"};
+		private final String[] columnNames = {"Nazwa",
+			"Opis",
+			"Prwd wystapienia",
+			"Koszt",
+			"Data wystapienia",
+			"Data zakonczenia",
+			"Aktywne"};
+
 		private Object[][] data;
 
 		public void setData(Object[][] val) {

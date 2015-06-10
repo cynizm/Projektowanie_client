@@ -1,4 +1,4 @@
-package client_layer;
+package client.layer;
 
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -22,7 +22,6 @@ public class Lista_sprintow_form extends JPanel implements ActionListener {
     MyTableModel model, modelStanow;
     JComboBox bProjekt;
     JLabel lstany = new JLabel("Stany:");
-    //JComboBox stany= new JComboBox();
     int licz;
     public Lista_sprintow_form() {
         super();
@@ -36,9 +35,7 @@ public class Lista_sprintow_form extends JPanel implements ActionListener {
         
         model = new MyTableModel();
         table = new JTable(model);
-       
-        //table.getColumn("Nazwa projektu").setMinWidth(175);
-        //table.getColumn("Kierownik projektu").setMinWidth(175);
+
         table.setPreferredScrollableViewportSize(new Dimension(500, 100));
         table.setFillsViewportHeight(true);
         table.getSelectionModel().addListSelectionListener(new RowListener());
@@ -94,9 +91,10 @@ public class Lista_sprintow_form extends JPanel implements ActionListener {
             modelStanow.setData(stany);
         }
     }
-    
+        
     @Override
     public void actionPerformed(ActionEvent event) {
+          // nie zaimplementowano
     }
     
     private class RowListener implements ListSelectionListener {

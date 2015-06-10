@@ -1,5 +1,5 @@
 
-package client_layer;
+package client.layer;
 
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
@@ -169,6 +169,8 @@ public class Panel_util implements ActionListener {
             case STAN_SPRINTU:
                 ((DodajStanSprintu_form) cards.getComponent(10)).init();                
                 cl.show(cards, STAN_SPRINTU); 
+                break;
+            default:
                 break;
         }
     }

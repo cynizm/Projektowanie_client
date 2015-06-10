@@ -1,4 +1,4 @@
-package client_layer;
+package client.layer;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -83,16 +83,16 @@ public class DodajRyzyko_form extends JPanel implements ActionListener {
 
 	public String[] form_content() {
 		if (!content_validate(Nazwa)) {
-			return null;
+			return new String[0];
 		}
 		if (!content_validate(PrwdWystapienia)) {
-			return null;
+			return new String[0];
 		}
 		if (!content_validate(KosztWystapienia)) {
-			return null;
+			return new String[0];
 		}
 		if (!content_validate(Opis)) {
-			return null;
+			return new String[0];
 		}
 		String data[] = {(String) Opis.getText(), (String) Nazwa.getText(), (String) PrwdWystapienia.getText(), (String) KosztWystapienia.getText()};
 		return data;
@@ -101,7 +101,7 @@ public class DodajRyzyko_form extends JPanel implements ActionListener {
 	//metoda do refaktoryzacji
 	public boolean content_validate(JTextField tf) {
 		String str = tf.getText();
-		if (str.equals("")) {
+		if ("".equals(str)) {
 			JOptionPane.showMessageDialog(this, "Wymagana wartość");
 			return false;
 		} else if ("Nazwa".equals(tf.getName())) {

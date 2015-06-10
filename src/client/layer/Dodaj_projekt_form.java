@@ -1,4 +1,4 @@
-package client_layer;
+package client.layer;
 
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;

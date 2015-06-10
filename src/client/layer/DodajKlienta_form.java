@@ -1,5 +1,5 @@
 
-package client_layer;
+package client.layer;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
